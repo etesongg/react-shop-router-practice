@@ -1,0 +1,51 @@
+.login-button {
+    display: flex;
+    justify-content: flex-end;
+    margin:40px;
+}
+
+.nav-section {
+    display: flex;
+    justify-content: center;
+}
+.menu-list {
+    display:flex;
+    list-style-type: none;
+}
+.menu-list li {
+    padding: 10px;
+}
+.menu-area {
+    display: flex;
+    justify-content: center;
+}
+
+.search-area {
+    border-bottom: 1px solid black;
+    position: absolute;
+    right: 20px;
+    padding: 5px;
+  }
+.search-area input {
+    border: none;
+    margin-left: 5px;
+}
+.search-area input:focus {
+    outline: none;
+}
+
+.product-card {
+    transition: transform 0.3s ;
+}
+.product-card:hover {
+    transform: scale(1.1);
+}
+.product-card img {
+    width: 280px;
+}
+
+@media all and (max-width:1200px){
+    .product-card img {
+        width: 220px;
+    }
+  } 
