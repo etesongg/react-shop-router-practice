@@ -5,7 +5,8 @@ import ProductAll from './page/ProductAll';
 import ProductDetail from './page/ProductDetail';
 import Login from './page/Login';
 import Navbar from './component/Navbar'
-import { useState } from 'react';
+import PrivateRouter from './route/PrivateRouter';
+import { useEffect, useState } from 'react';
 
 
 // 1. 전체상품페이지, 로그인, 상품상세페이지
@@ -19,16 +20,18 @@ import { useState } from 'react';
 // 7. 상품을 검색할 수 있다.
 function App() {
   const [authenticate, setAuthenticate] = useState(false)
-  const PrivateRouter = () => {
-    return authenticate === true? <ProductDetail />: <Navigate to="/login" />
-  }
+
+  useEffect(()=>{
+    console.log("authenticate",authenticate)
+  },[authenticate])
+  
   return (
     <div>
-      <Navbar />
+      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate}/>
       <Routes>
         <Route path="/" element={<ProductAll />} /> 
-        <Route path="/login" element={<Login />} /> 
-        <Route path="/product/:id" element={<PrivateRouter />} /> 
+        <Route path="/login" element={<Login setAuthenticate={setAuthenticate}/>} /> 
+        <Route path="/product/:id" element={<PrivateRouter authenticate={authenticate}/>} /> 
       </Routes>
     </div>
   );
