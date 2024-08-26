@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../component/ProductCard";
 import { Container, Row, Col } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
+import { productAction } from "../redux/actions/productAction"
+import { useDispatch, useSelector } from "react-redux"
 
 const ProductAll = () => {
-  const [productList, setProductList] = useState([]);
+  // const [productList, setProductList] = useState([]);
+  const productList = useSelector(state=>state.productList)
   const [query, setQuery] = useSearchParams();
+  const dispatch = useDispatch()
   const getProducts = async () => {
     let searchQuery = query.get("q") || "";
-    let url = `https://my-json-server.typicode.com/etesongg/react-shop-router-practice/products?q=${searchQuery}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setProductList(data);
+    dispatch(productAction.getProducts(searchQuery))
   };
   useEffect(() => {
     getProducts();
