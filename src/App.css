@@ -139,6 +139,10 @@
   margin-top: 20px;
 }
 
+.nav-section img {
+    cursor: pointer;
+}
+
 /* 사이드 메뉴 */
 .side-menu {
   height: 100%;
@@ -180,3 +184,5 @@
   background-color: rgb(187, 187, 184);
   border-radius: 3px;
 }
+
+
