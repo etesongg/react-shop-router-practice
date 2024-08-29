@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authenticateAction } from "../redux/actions/authenticateAction";
 
-const Navbar = ({ authenticate, setAuthenticate }) => {
+const Navbar = ({ authenticate }) => {
   const menuList = [
     "Women",
     "Men",
@@ -17,6 +19,8 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
   ];
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const goToLogin = () => {
     navigate("/login");
   };
@@ -32,6 +36,9 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
 
   const goToProductAll = () => {
     navigate("/");
+  };
+  const handleLogout = () => {
+    dispatch(authenticateAction.logout());
   };
 
   let [width, setWidth] = useState(0);
@@ -53,7 +60,7 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
           <FontAwesomeIcon icon={faBars} onClick={() => setWidth(250)} />
         </div>
         {authenticate ? (
-          <div className="login-button" onClick={() => setAuthenticate(false)}>
+          <div className="login-button" onClick={handleLogout}>
             <FontAwesomeIcon icon={faUser} />
             <div className="cursor">로그아웃</div>
           </div>

@@ -1,13 +1,13 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
-import ProductAll from './page/ProductAll';
-import ProductDetail from './page/ProductDetail';
-import Login from './page/Login';
-import Navbar from './component/Navbar'
-import PrivateRouter from './route/PrivateRouter';
-import { useEffect, useState } from 'react';
-
+import ProductAll from "./page/ProductAll";
+import ProductDetail from "./page/ProductDetail";
+import Login from "./page/Login";
+import Navbar from "./component/Navbar";
+import PrivateRouter from "./route/PrivateRouter";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // 1. 전체상품페이지, 로그인, 상품상세페이지
 // 2. 전체 상품페이지에서는 전체 상품을 볼 수 있다
@@ -19,19 +19,25 @@ import { useEffect, useState } from 'react';
 // 6. 로그인을 하면 로그아웃이 보이고 로그아웃을 하면 로그인이 보인다
 // 7. 상품을 검색할 수 있다.
 function App() {
-  const [authenticate, setAuthenticate] = useState(false)
+  // const [authenticate, setAuthenticate] = useState(false)
+  const authenticate = useSelector((state) => state.auth.authenticate);
+  useEffect(() => {
+    console.log("app authenticate", authenticate);
+  }, [authenticate]);
 
-  useEffect(()=>{
-    console.log("authenticate",authenticate)
-  },[authenticate])
-  
   return (
     <div>
-      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate}/>
+      <Navbar authenticate={authenticate} />
       <Routes>
-        <Route path="/" element={<ProductAll />} /> 
-        <Route path="/login" element={<Login setAuthenticate={setAuthenticate}/>} /> 
-        <Route path="/product/:id" element={<PrivateRouter authenticate={authenticate}/>} /> 
+        <Route path="/" element={<ProductAll />} />
+        <Route
+          path="/login"
+          element={<Login setAuthenticate={authenticate} />}
+        />
+        <Route
+          path="/product/:id"
+          element={<PrivateRouter authenticate={authenticate} />}
+        />
       </Routes>
     </div>
   );
