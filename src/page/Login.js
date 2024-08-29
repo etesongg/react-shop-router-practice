@@ -23,7 +23,7 @@ const Login = ({ authenticate }) => {
           <Form.Control
             type="email"
             placeholder="Enter email"
-            onChange={(event) => setId(event.target.valueAsData)}
+            onChange={(event) => setId(event.target.value)}
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
